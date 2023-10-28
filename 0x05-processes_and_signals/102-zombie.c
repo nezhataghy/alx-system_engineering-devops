@@ -4,6 +4,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+int loop_inifinit(void);
+
 /**
  * main - Creates five zombie processes.
  *
@@ -27,10 +29,21 @@ int main(void)
             exit(0);
     }
 
+    loop_inifinit();
+
+    return (EXIT_SUCCESS);
+}
+
+/**
+ * loop_inifinit - Run an infinite while loop.
+ *
+ * Return: Always 0.
+ */
+int loop_inifinit(void)
+{
     while (1)
     {
         sleep(1);
     }
-
-    return (EXIT_SUCCESS);
+    return (0);
 }
