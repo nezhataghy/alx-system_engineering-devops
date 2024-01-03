@@ -1,1 +1,7 @@
 #!/usr/bin/env bash
+# Script will install nginx on a server
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo ufw allow 'Nginx HTTP' # Nginx should be listening on port 80
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
+sudo service nginx start
