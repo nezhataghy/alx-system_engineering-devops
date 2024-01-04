@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# install nginx, change root content and redirect to youtube link
+# Script containing commands to automatically configure a server: install nginx, change root content and redirect to youtube link
 sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
