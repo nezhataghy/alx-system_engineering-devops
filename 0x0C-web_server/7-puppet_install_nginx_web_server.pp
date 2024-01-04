@@ -1,23 +1,46 @@
 # install the package
-package { 'nginx':
-  ensure   => 'latest',
-  name     => 'nginx',
-  provider => 'apt'
+package{ 'nginx':
+  ensure => 'installed',
 }
 
-file { 'index':
-  path    => '/var/www/html/index.nginx-debian.html',
-  mode    => '0644',
-  content => 'Hello World!'
+service{ 'nginx':
+  ensure => 'running',
+  enable => 'true',
 }
 
-file_line { '301 Moved Permanently':
-  path  => '/etc/nginx/sites-available/default',
-  line  => '\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
-  after => '^server {'
+file{'/etc/nginx/sites-available/default':
+  ensure => 'file',
+  content => 'server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name localhost;
+    error_page 404 /404.html;
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+}',
+  require => Package['nginx'],
+  notify => Service['nginx'],
+  replace => 'true',
 }
 
-service { 'nginx':
-  ensure => running,
-  enable => true
-}
+file {'/var/www/html/index.html':
+  ensure => 'file',
+  content => 'Hello World!',
+  require => Package['nginx'],
+  notify => Service['nginx'],
+  }
+
+file {'/var/www/html/404.html':
+  ensure => 'file',
+  content => "Ceci n'est pas une page",
+  require => Package['nginx'],
+  notify => Service['nginx'],}
