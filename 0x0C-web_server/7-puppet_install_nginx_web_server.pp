@@ -8,7 +8,7 @@ package { 'nginx':
 file { 'index':
   path    => '/var/www/html/index.nginx-debian.html',
   mode    => '0644',
-  content => 'Holberton School'
+  content => 'Hello World!'
 }
 
 file_line { '301 Moved Permanently':
