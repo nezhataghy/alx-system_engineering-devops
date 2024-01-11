@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Fixing the issue with port 8080
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+sudo service nginx restart
