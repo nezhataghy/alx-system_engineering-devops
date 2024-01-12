@@ -2,7 +2,7 @@
 
 frontend lb-01
     bind *:80
-    bind *:443 ssl crt /etc/letsencrypt/archive/www.nezmah.tech/m.pem
+    bind *:443 ssl crt /etc/letsencrypt/archive/nezmah.tech/m.pem
     mode http
     default_backend webservers
 
