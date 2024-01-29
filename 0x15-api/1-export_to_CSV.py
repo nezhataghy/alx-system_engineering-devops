@@ -9,6 +9,8 @@ def TODO_progress(id):
 
     url = "https://jsonplaceholder.typicode.com/"
     json_reponse = requests.get(url + "users/{}".format(id)).json()
+    if json_reponse == {}:
+        exit()
     name_of_emp = json_reponse["name"]
     json_todos = requests.get(url + "users/{}/todos".format(id)).json()
 
@@ -17,9 +19,9 @@ def TODO_progress(id):
         if task.get('userId') == id:
             todos_list.append(task)
 
-    with open(f"{id}.csv", "w") as file:
+    with open(f"{id}.csv", "w", newline='') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
-        for task in json_todos:
+        for task in todos_list:
             writer.writerow(f'"{id}","{name_of_emp}",'
                             f'"{task.get("completed")}","{task.get("title")}"\n')
 
