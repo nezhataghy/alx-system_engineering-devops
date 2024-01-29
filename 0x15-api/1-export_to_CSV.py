@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """Export to CSV"""
+import csv
 import requests
 import sys
-import csv
 
 
 def TODO_progress(id):
@@ -22,8 +22,9 @@ def TODO_progress(id):
     with open(f"{id}.csv", "w", newline='') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
         for task in todos_list:
-            writer.writerow(f'"{id}","{name_of_emp}",'
-                            f'"{task.get("completed")}","{task.get("title")}"\n')
+            writer.writerow([f'"{id}","{name_of_emp}",'
+                            f'"{task.get("completed")}",
+                            "{task.get("title")}"\n'])
 
 
 if __name__ == "__main__":
