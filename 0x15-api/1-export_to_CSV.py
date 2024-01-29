@@ -1,32 +1,18 @@
 #!/usr/bin/python3
-"""Gather data from API save to csv"""
-
+"""Exports to-do list information for a given employee ID to CSV format."""
 import csv
 import requests
-from sys import argv
-
-
-def TODO_progress(id):
-    """export to csv"""
-    url = "https://jsonplaceholder.typicode.com/"
-    json_reponse = requests.get(url + "users/{}".format(id)).json()
-    if json_reponse == {}:
-        exit()
-    name_of_emp = json_reponse["username"]
-    json_todos = requests.get(url + "users/{}/todos".format(id)).json()
-
-    todos_list = []
-    for task in json_todos:
-        if task.get('userId') == id:
-            todos_list.append(task)
-
-    with open(f"{id}.csv", "w", newline='') as file:
-        writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
-        for task in todos_list:
-            writer.writerow([f'"{id}","{name_of_emp}",'
-                            f'"{task.get("completed")}",
-                            "{task.get("title")}"\n'])
-
+import sys
 
 if __name__ == "__main__":
-    TODO_progress(argv[1])
+    user_id = sys.argv[1]
+    url = "https://jsonplaceholder.typicode.com/"
+    user = requests.get(url + "users/{}".format(user_id)).json()
+    username = user.get("username")
+    todos = requests.get(url + "todos", params={"userId": user_id}).json()
+
+    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
+        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+        [writer.writerow(
+            [user_id, username, t.get("completed"), t.get("title")]
+        ) for t in todos]
