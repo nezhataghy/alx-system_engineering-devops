@@ -7,14 +7,13 @@ import sys
 
 def tasks_done(id):
 
+    task_completed = 0
+    task_list = ""
     url = "https://jsonplaceholder.typicode.com/"
     json_reponse = requests.get(url + "users/{}".format(id)).json()
     name_of_emp = json_reponse.get("name")
     json_todos = requests.get(url + "users/{}/todos".format(id)).json()
     total_tasks = len(json_todos)
-
-    task_completed = 0
-    task_list = ""
 
     for task in json_todos:
         if task.get("completed") is True:
