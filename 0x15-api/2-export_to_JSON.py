@@ -11,12 +11,12 @@ def TODO_progress(id):
     username = user.get("username")
     todos = requests.get(url + "todos", params={"userId": id}).json()
 
-    with open("{}.json".format(id), "w") as jsonfile:
+    with open("{}.json".format(id), "w") as file:
         json.dump({id: [{
             "task": t.get("title"),
             "completed": t.get("completed"),
             "username": username
-        } for t in todos]}, jsonfile)
+        } for t in todos]}, file)
 
 
 if __name__ == "__main__":
