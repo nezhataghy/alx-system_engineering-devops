@@ -11,17 +11,10 @@ def TODO_progress(id):
     name_of_emp = json_reponse["name"]
     json_todos = requests.get(url + "users/{}/todos".format(id)).json()
 
-    file_name = "{}.csv".format(id)
-    with open(file_name, "a") as fd:
+    with open(f"{id}.csv", "w") as file:
         for task in json_todos:
-            completed = task.get("completed")
-            title = task.get("title")
-            data = "\"{}\",\"{}\",\"{}\",\"{}\"\n".format(id,
-                                                          name_of_emp,
-                                                          completed,
-                                                          title
-                                                          )
-            fd.write(data)
+            file.write(f'"{id}","{name_of_emp}",'
+                       f'"{task.get("completed")}","{task.get("title")}"\n')
 
 
 if __name__ == "__main__":
