@@ -4,8 +4,9 @@ import csv
 import requests
 import sys
 
-if __name__ == "__main__":
-    user_id = sys.argv[1]
+
+def TODO_progress(id):
+    user_id = id
     url = "https://jsonplaceholder.typicode.com/"
     user = requests.get(url + "users/{}".format(user_id)).json()
     username = user.get("username")
@@ -16,3 +17,7 @@ if __name__ == "__main__":
         [writer.writerow(
             [user_id, username, t.get("completed"), t.get("title")]
         ) for t in todos]
+
+
+if __name__ == "__main__":
+    TODO_progress(sys.argv[1])
