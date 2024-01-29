@@ -15,8 +15,8 @@ def TODO_progress(id):
     with open(f"{id}.csv", "w") as file:
         writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
         for task in json_todos:
-            file.writerow(f'"{id}","{name_of_emp}",'
-                          f'"{task.get("completed")}","{task.get("title")}"\n')
+            writer.writerow(f'"{id}","{name_of_emp}",'
+                            f'"{task.get("completed")}","{task.get("title")}"\n')
 
 
 if __name__ == "__main__":
