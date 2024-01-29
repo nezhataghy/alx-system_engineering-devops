@@ -16,12 +16,12 @@ def TODO_progress(id):
         for task in json_todos:
             completed = task.get("completed")
             title = task.get("title")
-            csv_data = "\"{}\",\"{}\",\"{}\",\"{}\"\n".format(id,
-                                                              name_of_emp,
-                                                              completed,
-                                                              title
-                                                              )
-            fd.write(csv_data)
+            data = "\"{}\",\"{}\",\"{}\",\"{}\"\n".format(id,
+                                                          name_of_emp,
+                                                          completed,
+                                                          title
+                                                          )
+            fd.write(data)
 
 
 if __name__ == "__main__":
