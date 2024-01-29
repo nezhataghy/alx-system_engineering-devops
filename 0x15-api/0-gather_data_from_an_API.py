@@ -5,7 +5,7 @@ import requests
 import sys
 
 
-def tasks_done(id):
+def TODO_progress(id):
 
     task_completed = 0
     task_list = ""
@@ -27,4 +27,4 @@ def tasks_done(id):
 
 
 if __name__ == "__main__":
-    tasks_done(sys.argv[1])
+    TODO_progress(sys.argv[1])
