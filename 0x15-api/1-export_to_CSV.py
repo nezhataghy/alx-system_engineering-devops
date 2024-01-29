@@ -8,7 +8,7 @@ def TODO_progress(id):
 
     url = "https://jsonplaceholder.typicode.com/"
     json_reponse = requests.get(url + "users/{}".format(id)).json()
-    name_of_emp = json_reponse.get("name")
+    name_of_emp = json_reponse["name"]
     json_todos = requests.get(url + "users/{}/todos".format(id)).json()
 
     file_name = "{}.csv".format(id)
