@@ -12,6 +12,11 @@ def TODO_progress(id):
     name_of_emp = json_reponse["name"]
     json_todos = requests.get(url + "users/{}/todos".format(id)).json()
 
+    todos_list = []
+    for task in json_todos:
+        if task.get('userId') == id:
+            todos_list.append(task)
+
     with open(f"{id}.csv", "w") as file:
         writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
         for task in json_todos:
