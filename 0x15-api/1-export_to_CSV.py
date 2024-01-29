@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""Export to CSV"""
-
+"""Export to-do list to CSV"""
 import csv
 import requests
 import sys
@@ -12,7 +11,7 @@ def TODO_progress(id):
     json_reponse = requests.get(url + "users/{}".format(id)).json()
     if json_reponse == {}:
         exit()
-    name_of_emp = json_reponse["name"]
+    name_of_emp = json_reponse["username"]
     json_todos = requests.get(url + "users/{}/todos".format(id)).json()
 
     todos_list = []
