@@ -2,6 +2,7 @@
 """Export to CSV"""
 import requests
 import sys
+import csv
 
 
 def TODO_progress(id):
@@ -12,9 +13,10 @@ def TODO_progress(id):
     json_todos = requests.get(url + "users/{}/todos".format(id)).json()
 
     with open(f"{id}.csv", "w") as file:
+        writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
         for task in json_todos:
-            file.write(f'"{id}","{name_of_emp}",'
-                       f'"{task.get("completed")}","{task.get("title")}"\n')
+            file.writerow(f'"{id}","{name_of_emp}",'
+                          f'"{task.get("completed")}","{task.get("title")}"\n')
 
 
 if __name__ == "__main__":
