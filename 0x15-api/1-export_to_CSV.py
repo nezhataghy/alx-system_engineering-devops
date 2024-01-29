@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-"""Export to-do list to CSV"""
+"""Gather data from API save to csv"""
 
 import csv
 import requests
-import sys
+from sys import argv
 
 
 def TODO_progress(id):
@@ -29,4 +29,4 @@ def TODO_progress(id):
 
 
 if __name__ == "__main__":
-    TODO_progress(sys.argv[1])
+    TODO_progress(argv[1])
