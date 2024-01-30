@@ -13,10 +13,10 @@ def TODO_progress(id):
 
     with open("{}.json".format(id), "w") as file:
         json.dump({id: [{
-            "task": t.get("title"),
-            "completed": t.get("completed"),
+            "task": task.get("title"),
+            "completed": task.get("completed"),
             "username": username
-        } for t in todos]}, file)
+        } for task in todos]}, file)
 
 
 if __name__ == "__main__":
