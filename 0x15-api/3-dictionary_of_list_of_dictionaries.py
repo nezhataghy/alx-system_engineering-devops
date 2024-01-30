@@ -8,7 +8,7 @@ def TODO_progress():
     url = "https://jsonplaceholder.typicode.com/"
     users = requests.get(url + "users").json()
 
-    with open("todo_all_employees.json", "w") as jsonfile:
+    with open("todo_all_employees.json", "w") as file:
         json.dump({
             user.get("id"): [{
                 "task": rep.get("title"),
@@ -16,7 +16,7 @@ def TODO_progress():
                 "username": user.get("username")
             } for rep in requests.get(url + "todos",
                                       params={"userId": user.get("id")}).json()]
-            for user in users}, jsonfile)
+            for user in users}, file)
 
 
 if __name__ == "__main__":
