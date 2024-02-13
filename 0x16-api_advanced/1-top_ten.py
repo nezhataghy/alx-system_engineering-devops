@@ -6,7 +6,7 @@ import requests
 def top_ten(subreddit):
     """Function send a request to reddit API"""
 
-    headers = {'User-Agent': 'MyApp/4.0'}
+    headers = {'User-Agent': 'MyPythonScript/1.0'}
     url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
     data = requests.get(url=url, headers=headers, allow_redirects=False)
     if data.status_code == 200:
